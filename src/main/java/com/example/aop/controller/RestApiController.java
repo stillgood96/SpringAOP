@@ -13,9 +13,6 @@ public class RestApiController {
     @GetMapping("/get/{id}")
     public String get(@PathVariable Long id, @RequestParam String name) {
 
-        System.out.println("get method");
-        System.out.println("get method id : " + id);
-        System.out.println("get method name : " + name);
 
         return id+ " " + name;
     }
@@ -23,7 +20,6 @@ public class RestApiController {
     @PostMapping("/post")
     public User post(@RequestBody User user) {
 
-        System.out.println("Post method : " + user);
 
 
         return user;

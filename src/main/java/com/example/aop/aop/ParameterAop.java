@@ -6,7 +6,10 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
 
 @Aspect // Aop로 동작하기 위해서 필요한 어노테이션
 @Component // 당연히 스프링에서 관리되어지기 위한 Component 어노테이션
@@ -24,6 +27,13 @@ public class ParameterAop {
     // 들어가는 지점에 들어가는 정보가 전부 JoinPoint 객체에 담겨진다.
     @Before("cut()")
     public void before(JoinPoint joinPoint) {
+        // 메서드명 알아오기
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        Method method = methodSignature.getMethod();
+        System.out.println(method.getName());
+
+
+
         Object [] args = joinPoint.getArgs(); // 메서드에 들어가는 매개변수들을 받아오는 getArgs();
 
         for(Object obj : args) {
